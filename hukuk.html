@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hukuk Atölyesi — Balkan Gençlik Okulu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+   --navy: #0B2B5C;        /* ana hukuk lacivert */
+  --navy-mid: #1E3A8A;    /* ikinci lacivert */
+
+  --blue: #C9A227;        /* ALTIN (accent artık bu) */
+  --blue-light: #d4af37a7;  /* açık altın */
+
+    --light: #445687;
+  --sky: #E5E7EB;         /* soft gri */
+  --ice: #F3F4F6;         /* açık arka plan */
+  --frost: #F8FAFC;      /* ultra light background */
+
+  --white: #FFFFFF;
+
+  --text-dark: #0F172A;   /* ciddi koyu metin */
+  --text-mid: #334155;
+  --text-light: #64748B;
+
+  --border: rgba(15, 23, 42, 0.10);
+  --border-mid: rgba(15, 23, 42, 0.20);
+    --display:   'Playfair Display', Georgia, serif;
+    --body:       'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    color: var(--text-dark);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(248, 244, 238, 0.95);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 5%;
+        border-bottom: 1px solid var(--border-mid);
+    }
+    
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--navy);
+    }
+    
+    .nav-logo-mark {
+        width: 32px;
+        height: 32px;
+        background: var(--navy);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: var(--navy);
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+        color: var(--sage);
+    }
+    
+    .nav-cta {
+        background: var(--navy);
+        color: white;
+        padding: 0.75rem 1.75rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+    }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(158deg, var(--navy) 0%, var(--navy-mid) 38%, #041a3e 68%, var(--light) 100%);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 1px, transparent 1px, transparent 40px);
+  }
+  .hero-arabesque {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(ellipse at 70% 50%, rgba(90,123,196,0.18) 0%, transparent 60%),
+                      radial-gradient(ellipse at 20% 80%, rgba(59,91,154,0.12) 0%, transparent 50%);
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 4vw 8vh;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  .hero-breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 2.5rem;
+    animation: fadeUp 0.8s ease both;
+    font-family: var(--body);
+  }
+  .hero-breadcrumb span { color: rgba(255,255,255,0.3); }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.38rem 1rem;
+    border-radius: 2px;
+    background: rgba(70, 106, 182, 0.2);
+    border: 0.5px solid rgba(118, 143, 198, 0.45);
+    font-size: 0.76rem; font-weight: 400; letter-spacing: 0.07em;
+    color: var(--blue);
+    width: fit-content;
+    margin-bottom: 1.75rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+    font-family: var(--body);
+    text-transform: uppercase;
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 0 3px rgba(212,175,123,0.25);
+  }
+
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(3rem, 7.5vw, 6rem);
+    font-weight: 400;
+    line-height: 1.02;
+    color: var(--white);
+    letter-spacing: -0.01em;
+    max-width: 16ch;
+    animation: fadeUp 0.9s 0.15s ease both;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--blue-light);
+  }
+
+  .hero-divider-line {
+    width: 60px; height: 1px;
+    background: rgba(90,123,196,0.6);
+    margin: 2.5rem 0;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .hero-meta-row {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    animation: fadeUp 0.9s 0.25s ease both;
+    flex-wrap: wrap;
+  }
+  .hero-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: rgba(255,255,255,0.65);
+    max-width: 50ch;
+  }
+  .hero-stats {
+    display: flex; gap: 2.5rem; flex-shrink: 0;
+  }
+  .hero-stat { text-align: right; }
+  .hero-stat-num {
+    font-family: var(--display);
+    font-size: 1.9rem; color: var(--blue); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    margin-top: 4px; letter-spacing: 0.08em; text-transform: uppercase;
+    font-family: var(--body);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+    animation: fadeIn 1s 0.8s ease both;
+    font-family: var(--body);
+  }
+  .hero-scroll-line {
+    width: 1px; height: 44px;
+    background: linear-gradient(to bottom, rgba(90,123,196,0.6), transparent);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 4vw;
+  }
+  .section-label {
+    font-size: 0.7rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--blue);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.2rem;
+    font-family: var(--body);
+  }
+  .section-label::before {
+    content: '';
+    display: block; width: 20px; height: 1px;
+    background: var(--blue-light);
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--blue); }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 4rem;
+  }
+  .about-text {
+    font-size: 1rem; font-weight: 300; line-height: 1.9;
+    color: var(--text-mid);
+  }
+  .about-text p + p { margin-top: 1.25rem; }
+  .about-text strong { font-weight: 500; color: var(--text-dark); }
+  .about-visual {
+    background: var(--frost);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    position: relative;
+  }
+  .about-visual::before {
+    content: '';
+    position: absolute; inset: 8px;
+    border: 0.5px solid rgba(59,91,154,0.2);
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .about-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 2rem;
+  }
+  .tag {
+    padding: 0.38rem 1rem;
+    border-radius: 2px;
+    background: var(--cream);
+    color: var(--text-mid);
+    font-size: 0.78rem; font-weight: 400;
+    border: 0.5px solid var(--border);
+    transition: all 0.2s;
+    font-family: var(--body);
+  }
+  .tag:hover { background: var(--sand); border-color: var(--gold); color: var(--navy); }
+
+  /* ── DIVIDER ── */
+  .divider { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+  .program-photo {
+    margin-top: 2.5rem; border-radius: 6px; overflow: hidden;
+    border: 0.5px solid var(--border); box-shadow: 0 10px 30px rgba(59,31,14,0.12);
+  }
+  .program-photo img {
+    width: 100%; height: 280px; object-fit: cover; display: block;
+    filter: sepia(35%) contrast(1.1);
+  }
+
+/* ── EVENTS — 4 columns ── */
+  .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  background: var(--frost);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.event-card::after {
+  content: '';
+  position: absolute; 
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--blue), var(--blue-light));
+  transform: scaleY(0); 
+  transform-origin: top;
+  transition: transform 0.35s ease;
+}
+
+.event-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(30,42,68,0.08);
+}
+
+.event-card:hover::after { 
+  transform: scaleY(1); 
+}
+
+.event-num {
+  position: absolute; 
+  top: 1.5rem; 
+  right: 1.5rem;
+  font-family: var(--display);
+  font-size: 2rem; 
+  font-weight: 400; 
+  font-style: italic;
+  color: rgba(59,91,154,0.12);
+  line-height: 1;
+}
+
+.event-week {
+  font-size: 0.68rem; 
+  font-weight: 400; 
+  letter-spacing: 0.12em; 
+  text-transform: uppercase;
+  color: var(--blue); 
+  margin-bottom: 0.6rem;
+  font-family: var(--body);
+}
+
+.event-title {
+  font-family: var(--display);
+  font-size: 1rem; 
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.35;
+  max-width: 24ch;
+}
+
+.event-footer {
+  display: flex; 
+  align-items: center; 
+  gap: 8px;
+  margin-top: 1.5rem; 
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--border);
+  font-size: 0.72rem; 
+  color: var(--text-light);
+  font-family: var(--body);
+}
+
+.event-footer-dot {
+  width: 3px; 
+  height: 3px; 
+  border-radius: 50%;
+  background: var(--blue-light); 
+  flex-shrink: 0;
+}
+ 
+  /* ── INSTRUCTOR ── */
+.instructor-section {
+  background: var(--white);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+.instructor-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+.instructor-card {
+ display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0;
+}
+.instructor-portrait {
+  width: 160px; height: 160px; flex-shrink: 0; border-radius: 4px;
+  background: linear-gradient(135deg, var(--frost), var(--blue));
+  border: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 3.5rem; font-style: italic;
+  color: var(--blue);
+  position: relative; overflow: hidden;
+}
+.instructor-portrait::before {
+  content: ''; position: absolute; inset: 6px;
+  border: 0.5px solid rgba(15,23,42,0.15); border-radius: 2px;
+}
+.instructor-info { flex: 1; min-width: 260px; }
+.instructor-name {
+  font-family: var(--display); font-size: 2rem; font-weight: 400;
+  color: var(--text-dark); margin-bottom: 0.15rem;
+}
+.instructor-title {
+  font-size: 0.85rem; color: var(--blue); font-weight: 400;
+  letter-spacing: 0.04em; margin-bottom: 0.6rem; font-family: var(--body);
+}
+.instructor-bio {
+  font-size: 0.95rem; font-weight: 300; line-height: 1.85;
+  color: var(--text-mid); max-width: 52ch;
+}
+@media (max-width: 768px) {
+  .instructor-grid { flex-direction: column; }
+}
+
+  /* ── INFO BAR ── */
+  .info-bar {
+    background: var(--navy);
+    padding: 4rem 4vw;
+    position: relative;
+    overflow: hidden;
+  }
+  .info-bar::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px),
+      repeating-linear-gradient(-45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 40px);
+  }
+  .info-bar-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    position: relative;
+  }
+  .info-item-label {
+    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.38);
+    margin-bottom: 0.5rem;
+    font-family: var(--body);
+  }
+  .info-item-value {
+    font-family: var(--display);
+    font-size: 1.1rem; font-weight: 400; color: var(--blue);
+    line-height: 1.35;
+  }
+  .info-item-sub {
+    font-size: 0.75rem; color: rgba(255,255,255,0.35);
+    margin-top: 3px;
+    font-family: var(--body);
+  }
+
+  /* ── CTA ── */
+  .cta-section {
+    max-width: 1200px; margin: 0 auto;
+    padding: 6rem 4vw;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 3rem; flex-wrap: wrap;
+  }
+  .cta-title {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3.5vw, 2.9rem);
+    font-weight: 400; line-height: 1.12;
+    color: var(--text-dark);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+  .cta-title em { font-style: italic; color: var(--blue); }
+  .cta-sub {
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--text-mid); max-width: 44ch;
+    line-height: 1.75;
+    font-family: var(--body);
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.9rem; font-weight: 400;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    font-family: var(--body);
+  }
+  .cta-btn:hover { background: var(--navy-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(30,42,68,0.28); }
+
+  /* ── QUOTE BAND ── */
+  .quote-band {
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%);
+    padding: 4rem 4vw;
+    overflow: hidden;
+    position: relative;
+  }
+  .quote-band::before {
+    content: '\201C';
+    font-family: var(--display);
+    font-size: 16rem; font-style: italic;
+    color: rgba(255,255,255,0.04);
+    position: absolute;
+    left: 3vw; top: -2rem;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .quote-band-inner {
+    max-width: 900px; margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  .quote-text {
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    font-style: italic;
+    color: var(--blue);
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
+  }
+  .quote-attr {
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    font-family: var(--body);
+  }
+
+ /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .events-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-meta-row { flex-direction: column; align-items: flex-start; }
+    .hero-stat { text-align: left; }
+    .cta-section { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; gap: 1.5rem; }
+    .instructor-card { flex-direction: column; gap: 2rem; }
+    .events-grid { grid-template-columns: 1fr; }
+  }
+ @media (min-width: 1200px) {
+  .events-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* ── FOOTER ── */
+footer { 
+    background: var(--ice); 
+    border-top: 1px solid var(--border-mid); 
+    padding: 3.5rem 4vw 2.5rem; 
+}
+
+.footer-inner { 
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 2rem; 
+    flex-wrap: wrap; 
+}
+
+.footer-brand { 
+    font-family: var(--display); 
+    font-size: 1.1rem; 
+    font-weight: 600;
+    color: var(--navy); 
+    text-decoration: none; 
+}
+
+.footer-links { 
+    display: flex; 
+    gap: 2.25rem; 
+    list-style: none; 
+    font-size: 0.82rem; 
+    color: var(--text-light); 
+    font-family: var(--body); 
+}
+
+.footer-links a { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: color 0.25s ease; 
+}
+
+.footer-links a:hover { 
+    color: var(--blue); 
+}
+
+.footer-copy { 
+    font-size: 0.75rem; 
+    color: var(--text-light); 
+    font-family: var(--body); 
+    margin-top: 0.5rem;
+}
+
+/* ── DROPDOWN ── */
+  .dropdown { position: relative; }
+  .dropbtn { display: flex; align-items: center; gap: 6px; cursor: pointer; text-decoration: none; color: var(--navy); font-weight: 500; }
+  .arrow { font-size: 0.75em; transition: transform 0.3s ease; }
+  .dropdown-content {
+    display: none; position: absolute; background-color: white; min-width: 260px;
+    box-shadow: 0 12px 30px rgba(10,20,40,0.18); border-radius: 12px;
+    top: 100%; left: 50%; transform: translateX(-50%); margin-top: 10px;
+    z-index: 2000; padding: 10px 0; border: 1px solid #e5d9c0;
+  }
+  .dropdown-content a { color: var(--navy); padding: 12px 24px; text-decoration: none; display: block; font-weight: 500; transition: all 0.2s; white-space: nowrap; }
+  .dropdown-content a:hover { background-color: #f8f4eb; color: var(--olive); padding-left: 30px; }
+  .dropdown.active .arrow { transform: rotate(180deg); }
+  .dropdown.active .dropdown-content { display: block; }
+  @media (max-width: 768px) {
+    .dropdown-content { position: static; transform: none; box-shadow: none; border: none; margin-top: 8px; background: #f9f6f0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 14L9 4L15 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.5 10.5H12.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    Balkan Gençlik Okulu
+  </a>
+  
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#atolyeler" class="dropbtn" id="atolyeler-btn">
+        Atölyeler <span class="arrow">▼</span>
+      </a>
+      <div class="dropdown-content" id="dropdown-menu">
+        <a href="saglik.html">Sağlık Atölyesi</a>
+        <a href="medeniyet.html">Medeniyet Atölyesi</a>
+        <a href="hukuk.html">Hukuk Atölyesi</a>
+        <a href="ekonomi.html">Ekonomi Atölyesi</a>
+        <a href="dijitalMedia.html">Medya Okur Yazarlığı Atölyesi</a>
+        <a href="guzelsanatlar.html">Güzel Sanatlar Atölyesi</a>
+        <a href="edebiyat.html">Edebiyat Atölyesi</a>
+        <a href="bilisim.html">Bilişim Atölyesi</a>
+      </div>
+    </li>
+    <li><a href="aboutus.html">Hakkımızda</a></li>
+    <li><a href="#">Katılımcılar</a></li>
+    <li><a href="contact.html">İletişim</a></li>
+  </ul>
+  
+  <a href="#basvur" class="nav-cta">Başvur</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-arabesque"></div>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      Balkan Gençlik Okulu
+      <span>·</span>
+      Atölyeler
+      <span>·</span>
+      Hukuk
+    </div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Kayıtlar Açık · 2026
+    </div>
+    <h1 class="hero-title">
+      Hukuk<br><em>Atölyesi</em>
+    </h1>
+    <div class="hero-divider-line"></div>
+    <div class="hero-meta-row">
+      <p class="hero-desc">
+        Balkan ülkelerinden genç hukuk öğrencilerini, araştırmacıları ve adalet alanına ilgi duyan katılımcıları bir araya getiren kapsamlı bir eğitim ve uygulama programı.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">8</div>
+          <div class="hero-stat-label">Hafta</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">240</div>
+          <div class="hero-stat-label">Katılımcı</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Üsküp</div>
+          <div class="hero-stat-label">Konum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="section-label">Atölye Hakkında</div>
+  <div class="about-grid reveal">
+    <div>
+      <h2 class="section-title">Adaletin <em>dili,</em> analizin <em>gücü</em></h2>
+      <div style="height: 2rem;"></div>
+      <div class="about-text">
+        <p>Hukuk Atölyesi, gençlerin hukuki düşünme becerilerini geliştirmeyi, adalet sistemini daha derinlemesine anlamalarını ve eleştirel analiz yetkinliği kazanmalarını amaçlayan yoğun bir eğitim programıdır. Katılımcılar, atölye boyunca hukukçular, akademisyenler ve alanında uzman profesyonellerle birlikte çalışır.</p>
+        <p>Program; <strong>anayasa hukuku, insan hakları, temel hukuk ilkeleri, dava analizi ve güncel hukuki meseleler</strong> başlıkları altında birbirini tamamlayan modüllerden oluşur.</p>
+        <p>Farklı şehirlerden gelen katılımcılar, ortak dosyalar ve örnek davalar üzerinden birlikte analiz yaparak hukuki bakış açılarını geliştirir.</p>
+      </div>
+      <div class="about-tags">
+        <span class="tag">Anayasa Hukuku</span>
+        <span class="tag">İnsan Hakları</span>
+        <span class="tag">Temel Hukuk İlkeleri</span>
+        <span class="tag">Dava Analizi</span>
+        <span class="tag">Hukuki Araştırma</span>
+        <span class="tag">Vaka Çalışmaları</span>
+      </div>
+    </div>
+    <div class="about-visual">
+      <img src="Media/hukukMain.jpg" alt="Kapak fotografi">
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EVENTS - 8 WEEKS -->
+<section class="section">
+  <div class="reveal">
+    <div class="section-label">Program İçeriği</div>
+    <h2 class="section-title">Sekiz haftada <em>sekiz konu</em></h2>
+  </div>
+   <div class="program-photo reveal">
+    <img src="assets/cfe3e1c8-c76b-4631-8f52-4774fc50aad1.png" alt="Foto ekle">
+  </div>
+  <div class="events-grid">
+
+    <div class="event-card reveal">
+      <div class="event-num">1</div>
+      <div class="event-week">1. Hafta</div>
+      <div class="event-title">Yargı Sistemi ve Mahkemeler</div>
+      <div class="event-footer">
+        <span>Teori</span>
+        <span class="event-footer-dot"></span>
+        <span>Vaka İncelemesi</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-1">
+      <div class="event-num">2</div>
+      <div class="event-week">2. Hafta</div>
+      <div class="event-title">Ceza Hukukuna Giriş</div>
+      <div class="event-footer">
+        <span>Temel Kavramlar</span>
+        <span class="event-footer-dot"></span>
+        <span>Uygulama</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-2">
+      <div class="event-num">3</div>
+      <div class="event-week">3. Hafta</div>
+      <div class="event-title">Anayasa Hukuku ve Devlet Organları</div>
+      <div class="event-footer">
+        <span>Anayasa</span>
+        <span class="event-footer-dot"></span>
+        <span>Analiz</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-3">
+      <div class="event-num">4</div>
+      <div class="event-week">4. Hafta</div>
+      <div class="event-title">Hukukun Temel Kavramları ve Yorum Yöntemleri</div>
+      <div class="event-footer">
+        <span>Temel İlkeler</span>
+        <span class="event-footer-dot"></span>
+        <span>Vaka Çalışması</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal">
+      <div class="event-num">5</div>
+      <div class="event-week">5. Hafta</div>
+      <div class="event-title">İnsan Hakları ve Uluslararası Hukuk</div>
+      <div class="event-footer">
+        <span>İnsan Hakları</span>
+        <span class="event-footer-dot"></span>
+        <span>Tartışma</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-1">
+      <div class="event-num">6</div>
+      <div class="event-week">6. Hafta</div>
+      <div class="event-title">Özel Suç Tipleri ve Kara Para Aklama</div>
+      <div class="event-footer">
+        <span>Ceza Hukuku</span>
+        <span class="event-footer-dot"></span>
+        <span>Vaka Analizi</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-2">
+      <div class="event-num">7</div>
+      <div class="event-week">7. Hafta</div>
+      <div class="event-title">Siyasal Sistemler ve Hükümet Modelleri</div>
+      <div class="event-footer">
+        <span>Karşılaştırma</span>
+        <span class="event-footer-dot"></span>
+        <span>Panel</span>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-3">
+      <div class="event-num">8</div>
+      <div class="event-week">8. Hafta</div>
+      <div class="event-title">Güncel Hukuki Meseleler ve Kapanış</div>
+      <div class="event-footer">
+        <span>Konuk Konuşmacı</span>
+        <span class="event-footer-dot"></span>
+        <span>Proje Sunumu</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <div class="quote-band-inner reveal">
+    <p class="quote-text">
+     Adalet mülkün temelidir.
+    </p>
+    <div class="quote-attr">Hz. Ömer</div>
+  </div>
+</div>
+
+<!-- INSTRUCTOR -->
+<section class="instructor-section">
+  <div class="section">
+    <div class="reveal">
+      <div class="section-label">Atölye Hocaları</div>
+      <h2 class="section-title">Sizi yönlendirecek <em>isimler</em></h2>
+    </div>
+    <div class="instructor-grid">
+      <div class="instructor-card reveal">
+        <div class="instructor-portrait">M</div>
+        <div class="instructor-info">
+          <div class="instructor-name">Medadin Limani</div>
+          <div class="instructor-title">Hukuk Eğitmeni</div>
+          <p class="instructor-bio">
+            Medadin Limani, hukuk eğitimi ve insan hakları üzerine uzmanlaşmış bir akademisyendir. Katılımcılara hem teorik derinlik hem de pratik analiz becerisi kazandırmayı hedeflemektedir.
+          </p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal reveal-delay-1">
+        <div class="instructor-portrait">Ş</div>
+        <div class="instructor-info">
+          <div class="instructor-name">Şadiye Bataşoska</div>
+          <div class="instructor-title">Yüksek Lisans Mezunu &amp; Eğitmen</div>
+          <p class="instructor-bio">
+            Şadiye Bataşoska, genç hukukçuların gelişimine katkı sağlayan deneyimli bir eğitimcidir. Vaka analizleri ve tartışma oturumlarında aktif rol almaktadır.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <div class="info-item">
+      <div class="info-item-label">Tarihler</div>
+      <div class="info-item-value">Nisan - Haziran 2026</div>
+      <div class="info-item-sub">8 Hafta · Haftalık Oturumlar</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Konum</div>
+      <div class="info-item-value">Üsküp, Kuzey Makedonya</div>
+      <div class="info-item-sub">Tarihi şehir merkezi</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Dil</div>
+      <div class="info-item-value">Türkçe</div>
+      <div class="info-item-sub">Ek dil desteği mevcut</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Katılımcı Profili</div>
+      <div class="info-item-value">Genç Hukukçular</div>
+      <div class="info-item-sub">240 Kişi</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Ücret</div>
+      <div class="info-item-value">Ücretsiz</div>
+      <div class="info-item-sub">Başvuru şartı yok</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="basvur">
+  <div class="cta-section">
+    <div class="cta-text reveal">
+      <h2 class="cta-title">Bu atölyenin<br>bir parçası <em>olmak ister misin?</em></h2>
+      <p class="cta-sub">14–25 yaş arasında olup Balkan ülkelerinden biri vatandaşıysanız başvurabilirsiniz.</p>
+    </div>
+    <a href="#" class="cta-btn reveal">
+      Hemen Başvur
+      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 10h12M10 4l6 6-6 6"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-brand">Balkan Gençlik Okulu</a>
+    <ul class="footer-links">
+      <li><a href="#">Atölyeler</a></li>
+      <li><a href="#">Hakkımızda</a></li>
+      <li><a href="#">Basın</a></li>
+      <li><a href="#">İletişim</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Balkan Gençlik Okulu</p>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const dropdown = document.querySelector('.dropdown');
+const dropbtn = document.getElementById('atolyeler-btn');
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+dropbtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+// Close dropdown when pressing Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        dropdown.classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>

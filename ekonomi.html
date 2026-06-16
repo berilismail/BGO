@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ekonomi Atölyesi — Balkan Gençlik Okulu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;1,8..60,300;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:      #0B132B;
+    --navy-mid:  #1C2541;
+    --navy-light: #243464;
+    --accent:    #C5A880;
+    --accent-light: #D4B99A;
+    --sand:      #E8D5B8;
+    --cream:     #F5F0E6;
+    --frost:     #FAF7F0;
+    --white:     #FDFBF7;
+    --text-dark: #0B132B;
+    --text-mid:  #4A5568;
+    --text-light:#6B7A9A;
+    --border:    rgba(197,168,128,0.15);
+    --border-mid:rgba(197,168,128,0.25);
+
+    --display:   'Playfair Display', Georgia, serif;
+    --body:       'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--body);
+    color: var(--text-dark);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(248, 244, 238, 0.95);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem 5%;
+        border-bottom: 1px solid var(--border-mid);
+    }
+    
+    .nav-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        text-decoration: none;
+        color: var(--navy);
+    }
+    
+    .nav-logo-mark {
+        width: 32px;
+        height: 32px;
+        background: var(--navy);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
+    
+    .nav-links a {
+        text-decoration: none;
+        color: var(--navy);
+        font-weight: 500;
+        transition: color 0.3s;
+    }
+    
+    .nav-links a:hover {
+        color: var(--sage);
+    }
+    
+    .nav-cta {
+        background: var(--navy);
+        color: white;
+        padding: 0.75rem 1.75rem;
+        border-radius: 9999px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s;
+    }
+    
+    .nav-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1);
+    }
+  
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(158deg, var(--navy) 0%, var(--navy-mid) 38%, #1C2541 68%, #2A3A5E 100%);
+  }
+  .hero-pattern {
+    position: absolute; inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 1px, transparent 1px, transparent 40px),
+                      repeating-linear-gradient(-45deg, rgba(255,255,255,0.8) 0px, rgba(255,255,255,0.8) 1px, transparent 1px, transparent 40px);
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 120px 4vw 8vh;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  .hero-breadcrumb {
+    font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 0.38rem 1rem; border-radius: 2px;
+    background: rgba(197,168,128,0.2);
+    border: 0.5px solid rgba(197,168,128,0.45);
+    font-size: 0.76rem; letter-spacing: 0.07em;
+    color: var(--sand); text-transform: uppercase;
+    width: fit-content;
+    margin-bottom: 1.75rem;
+    animation: fadeUp 0.8s 0.1s ease both;
+    font-family: var(--body);
+  }
+  .badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.64);
+    box-shadow: 0 0 0 3px rgba(217, 215, 212, 0.25);
+  }
+  .hero-title {
+    font-family: var(--display);
+    font-size: clamp(3rem, 7.5vw, 6rem);
+    font-weight: 400; line-height: 1.02;
+    color: var(--white);
+    letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--sand); }
+
+  .hero-divider-line {
+    width: 60px; height: 1px;
+    background: rgba(197,168,128,0.6);
+    margin: 2.5rem 0;
+  }
+
+  .hero-meta-row {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 2rem; padding-top: 2rem;
+    border-top: 0.5px solid rgba(255,255,255,0.1);
+    flex-wrap: wrap;
+  }
+  .hero-desc {
+    font-size: 1rem; font-weight: 300; line-height: 1.8;
+    color: rgba(255,255,255,0.75); max-width: 55ch;
+  }
+  .hero-stats { display: flex; gap: 2.5rem; }
+  .hero-stat-num {
+    font-family: var(--display);
+    font-size: 1.9rem; color: var(--sand); line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.72rem; color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .hero-scroll-line {
+    width: 1px; height: 44px;
+    background: linear-gradient(to bottom, rgba(90,123,196,0.6), transparent);
+    animation: scrollPulse 2.2s ease-in-out infinite;
+  }
+
+  .program-photo {
+    margin-top: 2.5rem; border-radius: 6px; overflow: hidden;
+    border: 0.5px solid var(--border); box-shadow: 0 10px 30px rgba(59,31,14,0.12);
+  }
+  .program-photo img {
+    width: 100%; height: 280px; object-fit: cover; display: block;
+    filter: sepia(35%) contrast(1.1);
+  }
+
+  /* SECTIONS */
+  .section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 4vw;
+  }
+  .section-label {
+    font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.2rem;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; line-height: 1.1;
+    color: var(--text-dark);
+  }
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-top: 4rem;
+  }
+  .about-visual {
+    background: var(--frost);
+    border: 0.5px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  .about-visual img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* 8 WEEKS */
+  .events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.event-card {
+  background: var(--frost);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+
+.event-card::after {
+  content: '';
+  position: absolute; 
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent-light));
+  transform: scaleY(0); 
+  transform-origin: top;
+  transition: transform 0.35s ease;
+}
+
+.event-card:hover {
+  border-color: var(--border-mid);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(11,19,43,0.08);
+}
+
+.event-card:hover::after { 
+  transform: scaleY(1); 
+}
+
+.event-num {
+  position: absolute; 
+  top: 1.5rem; 
+  right: 1.5rem;
+  font-family: var(--display);
+  font-size: 2rem; 
+  font-weight: 400; 
+  font-style: italic;
+  color: rgba(197,168,128,0.12);
+  line-height: 1;
+}
+
+.event-week {
+  font-size: 0.68rem; 
+  font-weight: 400; 
+  letter-spacing: 0.12em; 
+  text-transform: uppercase;
+  color: var(--accent); 
+  margin-bottom: 0.6rem;
+  font-family: var(--body);
+}
+
+.event-title {
+  font-family: var(--display);
+  font-size: 1rem; 
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.35;
+  max-width: 24ch;
+}
+
+.event-footer {
+  display: flex; 
+  align-items: center; 
+  gap: 8px;
+  margin-top: 1.5rem; 
+  padding-top: 1.25rem;
+  border-top: 0.5px solid var(--border);
+  font-size: 0.72rem; 
+  color: var(--text-light);
+  font-family: var(--body);
+}
+
+.event-footer-dot {
+  width: 3px; 
+  height: 3px; 
+  border-radius: 50%;
+  background: var(--accent-light); 
+  flex-shrink: 0;
+}
+
+/* Optional: Better 4-column layout on large screens */
+@media (min-width: 1200px) {
+  .events-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+ /* INSTRUCTOR */
+.instructor-section {
+  background: var(--white);
+  border-top: 0.5px solid var(--border);
+  border-bottom: 0.5px solid var(--border);
+}
+.instructor-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3.5rem;
+  width: 100%;
+}
+.instructor-card {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.instructor-portrait {
+  width: 160px; height: 160px; flex-shrink: 0; border-radius: 4px;
+  background: linear-gradient(135deg, var(--frost), var(--sand));
+  border: 0.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 3.5rem; font-style: italic;
+  color: var(--accent);
+  position: relative; overflow: hidden;
+}
+.instructor-portrait::before {
+  content: ''; position: absolute; inset: 6px;
+  border: 0.5px solid rgba(197,168,128,0.2); border-radius: 2px;
+}
+.instructor-info {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+.instructor-name {
+  font-family: var(--display); font-size: 2rem; font-weight: 400;
+  color: var(--text-dark); margin-bottom: 0.15rem;
+}
+.instructor-title {
+  font-size: 0.85rem; color: var(--accent); font-weight: 400;
+  letter-spacing: 0.04em; margin-bottom: 0.6rem; font-family: var(--body);
+}
+.instructor-bio {
+  font-size: 0.95rem; font-weight: 300; line-height: 1.85;
+  color: var(--text-mid); max-width: 52ch;
+}
+  
+/* ── INFO BAR ── */
+.info-bar { 
+    background: var(--navy); 
+    padding: 4rem 4vw; 
+    position: relative; 
+    overflow: hidden; 
+}
+
+.info-bar::before {
+    content: ''; 
+    position: absolute; 
+    inset: 0;
+    background-image:
+        repeating-linear-gradient(45deg, rgba(197,168,128,0.06) 0px, rgba(197,168,128,0.06) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(-45deg, rgba(197,168,128,0.06) 0px, rgba(197,168,128,0.06) 1px, transparent 1px, transparent 40px);
+    opacity: 0.85;
+}
+
+.info-bar-inner {
+    max-width: 1200px; 
+    margin: 0 auto;
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem; 
+    position: relative;
+}
+
+.info-item-label { 
+    font-size: 0.68rem; 
+    letter-spacing: 0.12em; 
+    text-transform: uppercase; 
+    color: rgba(232,213,184,0.55); 
+    margin-bottom: 0.5rem; 
+    font-family: var(--body); 
+}
+
+.info-item-value { 
+    font-family: var(--display); 
+    font-size: 1.35rem; 
+    font-weight: 400; 
+    color: var(--sand); 
+    line-height: 1.35; 
+}
+
+.info-item-sub { 
+    font-size: 0.75rem; 
+    color: rgba(232,213,184,0.45); 
+    margin-top: 3px; 
+    font-family: var(--body); 
+}
+ /* ── CTA ── */
+.cta-section {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 6rem 4vw;
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    gap: 3rem; 
+    flex-wrap: wrap;          /* Deep navy background */
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+        repeating-linear-gradient(45deg, rgba(197,168,128,0.04) 0px, rgba(197,168,128,0.04) 1px, transparent 1px, transparent 50px);
+    pointer-events: none;
+}
+
+.cta-title {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3.5vw, 2.9rem);
+    font-weight: 400; 
+    line-height: 1.12;
+    color: var(--navy);                    /* Warm sand color for title */
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+}
+
+.cta-title em { 
+    font-style: italic; 
+    color: var(--accent);                  /* Warm gold accent */
+}
+
+.cta-sub {
+    font-size: 0.95rem; 
+    font-weight: 300;
+    color:var(--navy);     /* Light sand for subtitle */
+    max-width: 44ch;
+    line-height: 1.75;
+    font-family: var(--body);
+}
+
+.cta-btn {
+    display: inline-flex; 
+    align-items: center; 
+    gap: 10px;
+    padding: 1.1rem 2.25rem;
+    border-radius: 6px;  
+    background-color: var(--navy);  
+    color: white;               /* Dark text on gold button */
+    font-size: 0.95rem; 
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+    font-family: var(--body);
+    box-shadow: 0 4px 15px rgba(197,168,128,0.3);
+}
+
+.cta-btn:hover {      /* Lighter gold on hover */
+    transform: translateY(-3px); 
+    background-color: var(--navy-light);
+}
+
+.cta-btn svg { 
+    width: 17px; 
+    height: 17px; 
+}
+
+/* ── QUOTE BAND ── */
+.quote-band { 
+    background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%); 
+    padding: 4rem 4vw; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+.quote-band::before {
+    content: '\201C'; 
+    font-family: var(--display); 
+    font-size: 16rem; 
+    font-style: italic;
+    color: rgba(197,168,128,0.06);           /* Soft accent tone */
+    position: absolute; 
+    left: 3vw; 
+    top: -2rem; 
+    line-height: 1; 
+    pointer-events: none;
+}
+
+.quote-band-inner { 
+    max-width: 900px; 
+    margin: 0 auto; 
+    text-align: center; 
+    position: relative; 
+}
+
+.quote-text { 
+    font-family: var(--display); 
+    font-size: clamp(1.3rem, 2.5vw, 2rem); 
+    font-style: italic; 
+    color: var(--sand);                       /* Warm sand color */
+    line-height: 1.55; 
+    margin-bottom: 1.5rem; 
+}
+
+.quote-attr { 
+    font-size: 0.75rem; 
+    letter-spacing: 0.1em; 
+    text-transform: uppercase; 
+    color: rgba(232,213,184,0.55);           /* Light sand for attribution */
+    font-family: var(--body); 
+}
+
+/* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes scrollPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .events-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .hero-meta-row { flex-direction: column; align-items: flex-start; }
+    .hero-stat { text-align: left; }
+    .cta-section { flex-direction: column; align-items: flex-start; }
+    .footer-inner { flex-direction: column; gap: 1.5rem; }
+    .instructor-card { flex-direction: column; gap: 2rem; }
+    .events-grid { grid-template-columns: 1fr; }
+  }
+  /* ── FOOTER ── */
+  footer { background: var(--cream); border-top: 0.5px solid var(--border); padding: 3rem 4vw; }
+  .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+  .footer-brand { font-family: var(--display); font-size: 1rem; color: var(--umber); text-decoration: none; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; font-size: 0.78rem; color: var(--text-light); font-family: var(--body); }
+  .footer-links a { text-decoration: none; color: inherit; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--sienna); }
+  .footer-copy { font-size: 0.72rem; color: var(--text-light); font-family: var(--body); }
+
+   /* Dropdown Styles */
+.dropdown {
+    position: relative;
+}
+
+.dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 500;
+}
+
+.arrow {
+    font-size: 0.75em;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 260px;
+    box-shadow: 0 12px 30px rgba(10, 20, 40, 0.18);
+    border-radius: 12px;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 10px;
+    z-index: 2000;
+    padding: 10px 0;
+    border: 1px solid #e5d9c0;
+}
+
+.dropdown-content a {
+    color: var(--navy);
+    padding: 12px 24px;
+    text-decoration: none;
+    display: block;
+    font-weight: 500;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.dropdown-content a:hover {
+    background-color: #f8f4eb;
+    color: var(--olive);
+    padding-left: 30px;
+}
+
+.dropdown.active .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown.active .dropdown-content {
+    display: block;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        margin-top: 8px;
+        background: #f9f6f0;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span>
+      <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 14L9 4L15 14" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M5.5 10.5H12.5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+    </span>
+    Balkan Gençlik Okulu
+  </a>
+  
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#atolyeler" class="dropbtn" id="atolyeler-btn">
+        Atölyeler <span class="arrow">▼</span>
+      </a>
+      <div class="dropdown-content" id="dropdown-menu">
+        <a href="saglik.html">Sağlık Atölyesi</a>
+        <a href="medeniyet.html">Medeniyet Atölyesi</a>
+        <a href="hukuk.html">Hukuk Atölyesi</a>
+        <a href="ekonomi.html">Ekonomi Atölyesi</a>
+        <a href="dijitalMedia.html">Medya Okur Yazarlığı Atölyesi</a>
+        <a href="guzelsanatlar.html">Güzel Sanatlar Atölyesi</a>
+        <a href="edebiyat.html">Edebiyat Atölyesi</a>
+        <a href="bilisim.html">Bilişim Atölyesi</a>
+      </div>
+    </li>
+    <li><a href="aboutus.html">Hakkımızda</a></li>
+    <li><a href="#">Katılımcılar</a></li>
+    <li><a href="contact.html">İletişim</a></li>
+  </ul>
+  
+  <a href="#basvur" class="nav-cta">Başvur</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+
+  <div class="hero-inner">
+    <div class="hero-breadcrumb">
+      Balkan Gençlik Okulu <span>·</span> Atölyeler <span>·</span> Ekonomi
+    </div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Kayıtlar Açık · 2026
+    </div>
+    <h1 class="hero-title">
+      Ekonomi <br><em>Atölyesi</em>
+    </h1>
+    <div class="hero-divider-line"></div>
+    <div class="hero-meta-row">
+      <p class="hero-desc">
+        Küresel ekonomik sistemleri, finansal krizlerin oluşum mekanizmalarını ve kriz dönemlerinde alınan stratejik kararları inceleyen 8 haftalık yoğun akademik program.
+      </p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-num">8</div>
+          <div class="hero-stat-label">Hafta</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">240</div>
+          <div class="hero-stat-label">Katılımcı</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-num">Üsküp</div>
+          <div class="hero-stat-label">Konum</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="section-label">Atölye Hakkında</div>
+  <div class="about-grid reveal">
+    <div>
+      <h2 class="section-title">Ekonomiyi <em>krizler</em> üzerinden anlamak</h2>
+      <div style="height: 2rem;"></div>
+      <div class="about-text">
+        <p>Bu program, ekonomi bilimini sadece teorik veriler üzerinden değil, gerçek kriz vakaları üzerinden anlamayı hedefler. Katılımcılar, küresel finansal sistemlerin işleyişini, kriz dinamiklerini ve stratejik karar alma süreçlerini derinlemesine analiz eder.</p>
+        <p>Özellikle 2008 Küresel Finansal Krizi merkeze alınarak, krizlerin nedenleri, sonuçları ve yönetim stratejileri incelenir.</p>
+      </div>
+    </div>
+    <div class="about-visual">
+      <img src="ilkkk.jpg" alt="Ekonomi Görseli">
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- 8 WEEKS PROGRAM -->
+<section class="section">
+  <div class="reveal">
+    <div class="section-label">Program İçeriği</div>
+    <h2 class="section-title">Sekiz haftada <em>sekiz konu</em></h2>
+  </div>
+   <div class="program-photo reveal">
+    <img src="assets/cfe3e1c8-c76b-4631-8f52-4774fc50aad1.png" alt="Foto ekle">
+  </div>
+  <div class="events-grid">
+    <div class="event-card reveal">
+      <div class="event-num">1</div>
+      <div class="event-week">1. Hafta</div>
+      <div class="event-title">Ekonomik Sistemler ve Temel Kavramlar</div>
+      <div class="event-footer"><span>Teori</span><span class="event-footer-dot"></span><span>Tartışma</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-1">
+      <div class="event-num">2</div>
+      <div class="event-week">2. Hafta</div>
+      <div class="event-title">2008 Küresel Finansal Krizi - Nedenler</div>
+      <div class="event-footer"><span>Tarih</span><span class="event-footer-dot"></span><span>Analiz</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-2">
+      <div class="event-num">3</div>
+      <div class="event-week">3. Hafta</div>
+      <div class="event-title">Finansal Sistem ve Risk Yönetimi</div>
+      <div class="event-footer"><span>Finans</span><span class="event-footer-dot"></span><span>Vaka</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-3">
+      <div class="event-num">4</div>
+      <div class="event-week">4. Hafta</div>
+      <div class="event-title">Kriz Dönemlerinde İşletme Stratejileri</div>
+      <div class="event-footer"><span>Strateji</span><span class="event-footer-dot"></span><span>Uygulama</span></div>
+    </div>
+    <div class="event-card reveal">
+      <div class="event-num">5</div>
+      <div class="event-week">5. Hafta</div>
+      <div class="event-title">Nakit Akışı ve Maliyet Kontrolü</div>
+      <div class="event-footer"><span>Finansal Yönetim</span><span class="event-footer-dot"></span><span>Simülasyon</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-1">
+      <div class="event-num">6</div>
+      <div class="event-week">6. Hafta</div>
+      <div class="event-title">Liderlik ve Karar Alma Süreçleri</div>
+      <div class="event-footer"><span>Liderlik</span><span class="event-footer-dot"></span><span>Tartışma</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-2">
+      <div class="event-num">7</div>
+      <div class="event-week">7. Hafta</div>
+      <div class="event-title">Küresel Ekonomi ve Jeopolitik Riskler</div>
+      <div class="event-footer"><span>Küresel</span><span class="event-footer-dot"></span><span>Analiz</span></div>
+    </div>
+    <div class="event-card reveal reveal-delay-3">
+      <div class="event-num">8</div>
+      <div class="event-week">8. Hafta</div>
+      <div class="event-title">Güncel Kriz Senaryoları ve Kapanış</div>
+      <div class="event-footer"><span>Konuk</span><span class="event-footer-dot"></span><span>Proje</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE BAND -->
+<div class="quote-band" style="background: linear-gradient(90deg, var(--navy) 0%, var(--navy-mid) 100%); padding: 4rem 4vw; text-align: center; color: var(--sand);">
+  <p style="font-family: var(--display); font-size: clamp(1.3rem, 2.5vw, 2rem); font-style: italic; max-width: 900px; margin: 0 auto;">
+    Ekonomi çok tehlikeli bir bilimdir.
+  </p>
+  <div style="margin-top: 1rem; opacity: 0.7;">John Maynard Keynes</div>
+</div>
+
+<!-- INSTRUCTOR -->
+<section class="instructor-section">
+  <div class="section">
+    <div class="reveal">
+      <div class="section-label">Atölye Hocası</div>
+      <h2 class="section-title">Sizi yönlendirecek <em>isim</em></h2>
+    </div>
+    <div class="instructor-grid">
+      <div class="instructor-card reveal">
+        <div class="instructor-portrait">M</div>
+        <div class="instructor-info">
+          <div class="instructor-name">Mehmed Arif</div>
+          <div class="instructor-title">Ekonomi Atölyesi Hocası</div>
+          <p class="instructor-bio">
+            Mehmed Arif, ekonomi ve finans alanında çalışan bir eğitmen ve araştırmacıdır. Katılımcılara temel ekonomik kavramları, piyasa dinamiklerini ve güncel ekonomik meseleleri analiz etme becerisini kazandırmayı hedeflemektedir.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="info-bar-inner">
+    <div class="info-item">
+      <div class="info-item-label">Tarihler</div>
+      <div class="info-item-value">Nisan - Haziran 2026</div>
+      <div class="info-item-sub">8 Hafta · Haftalık Oturumlar</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Konum</div>
+      <div class="info-item-value">Üsküp, Kuzey Makedonya</div>
+      <div class="info-item-sub">Tarihi şehir merkezi</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Dil</div>
+      <div class="info-item-value">Türkçe</div>
+      <div class="info-item-sub">Ek dil desteği mevcut</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Katılımcı Profili</div>
+      <div class="info-item-value">Gençler & Öğrenciler</div>
+      <div class="info-item-sub">240 Kişi</div>
+    </div>
+    <div class="info-item">
+      <div class="info-item-label">Ücret</div>
+      <div class="info-item-value">Ücretsiz</div>
+      <div class="info-item-sub">Başvuru şartı yok</div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="basvur">
+  <div class="cta-section">
+    <div class="cta-text reveal">
+      <h2 class="cta-title">Bu atölyenin<br>bir parçası <em>olmak ister misin?</em></h2>
+      <p class="cta-sub">Lise veya üniversite öğrencisiyseniz ve ekonomi konusunda fark yaratmak istiyorsanız, bu atölye tam size göre.</p>
+    </div>
+    <a href="#" class="cta-btn reveal">
+      Hemen Başvur
+       <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M4 10h12M10 4l6 6-6 6"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <a href="#" class="footer-brand">Balkan Gençlik Okulu</a>
+    <ul class="footer-links">
+      <li><a href="#">Atölyeler</a></li>
+      <li><a href="#">Hakkımızda</a></li>
+      <li><a href="#">Basın</a></li>
+      <li><a href="#">İletişim</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Balkan Gençlik Okulu</p>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const dropdown = document.querySelector('.dropdown');
+const dropbtn = document.getElementById('atolyeler-btn');
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+dropbtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+// Close dropdown when pressing Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        dropdown.classList.remove('active');
+    }
+});
+</script>
+</body>
+</html>

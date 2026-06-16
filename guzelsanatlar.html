@@ -67,7 +67,7 @@
   }
   .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(31,17,43,0.15); }
 
-  /* All other styles from Medeniyet page (hero, sections, events, etc.) */
+
   /* ── HERO ── */
   .hero { position: relative; min-height: 100vh; overflow: hidden; }
   .hero-bg {
@@ -96,6 +96,7 @@
     font-size: 0.78rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase;
     color: rgba(255,255,255,0.5); margin-bottom: 2.5rem;
     font-family: var(--body);
+     animation: fadeUp 0.8s ease both;
   }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 6px;
@@ -104,6 +105,7 @@
     font-size: 0.76rem; font-weight: 400; letter-spacing: 0.07em;
     color: var(--sand); width: fit-content; margin-bottom: 1.75rem;
     font-family: var(--body); text-transform: uppercase;
+    animation: fadeUp 0.8s 0.1s ease both;
   }
   .badge-dot {
     width: 6px; height: 6px; border-radius: 50%;
@@ -113,16 +115,19 @@
     font-family: var(--display); font-size: clamp(3rem, 7.5vw, 6rem);
     font-weight: 400; line-height: 1.02; color: var(--white);
     letter-spacing: -0.01em; max-width: 16ch;
+     animation: fadeUp 0.9s 0.15s ease both;
   }
   .hero-title em { font-style: italic; color: var(--sand); }
   .hero-divider-line {
     width: 60px; height: 1px; background: rgba(214,194,228,0.6);
     margin: 2.5rem 0;
+    animation: fadeUp 0.9s 0.2s ease both;
   }
   .hero-meta-row {
     display: flex; align-items: flex-end; justify-content: space-between;
     gap: 2rem; padding-top: 2rem; border-top: 0.5px solid rgba(255,255,255,0.1);
     flex-wrap: wrap;
+     animation: fadeUp 0.9s 0.25s ease both; flex-wrap: wrap;
   }
   .hero-desc {
     font-size: 1rem; font-weight: 300; line-height: 1.8;
@@ -341,10 +346,19 @@
   .footer-links a:hover { color: var(--sienna); }
   .footer-copy { font-size: 0.72rem; color: var(--text-light); font-family: var(--body); }
 
-   /* ── ANIMATIONS ── */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  @keyframes scrollPulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+ /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
 
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: none; }
@@ -353,10 +367,8 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
 
+
   /* ── RESPONSIVE ── */
-  @media (max-width: 1024px) {
-    .events-grid { grid-template-columns: repeat(2, 1fr); }
-  }
   @media (max-width: 768px) {
     .nav-links { display: none; }
     .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -364,7 +376,6 @@
     .hero-meta-row { flex-direction: column; align-items: flex-start; }
     .hero-stat { text-align: left; }
     .cta-section { flex-direction: column; align-items: flex-start; }
-    .footer-inner { flex-direction: column; gap: 1.5rem; }
     .instructor-card { flex-direction: column; gap: 2rem; }
     .events-grid { grid-template-columns: 1fr; }
   }
@@ -456,7 +467,7 @@
 <!-- ABOUT -->
 <section class="section">
   <div class="section-label">Atölye Hakkında</div>
-  <div class="about-grid">
+  <div class="about-grid reveal">
     <div>
       <h2 class="section-title">Sanatın diliyle <em>buluşmak</em></h2>
       <div style="height: 2rem;"></div>
@@ -609,16 +620,38 @@
 </footer>
 
 <script>
-/* Same script as Medeniyet page */
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }});
-}, { threshold: 0.08 });
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 const dropdown = document.querySelector('.dropdown');
 const dropbtn = document.getElementById('atolyeler-btn');
-dropbtn.addEventListener('click', function(e) { e.preventDefault(); dropdown.classList.toggle('active'); });
-document.addEventListener('click', function(e) { if (!dropdown.contains(e.target)) dropdown.classList.remove('active'); });
-document.addEventListener('keydown', function(e) { if (e.key === 'Escape') dropdown.classList.remove('active'); });
+const dropdownMenu = document.getElementById('dropdown-menu');
+
+dropbtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(e) {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+// Close dropdown when pressing Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        dropdown.classList.remove('active');
+    }
+});
 </script>
 </body>
 </html>

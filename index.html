@@ -140,13 +140,7 @@
         padding: 0 5%;
         z-index: 2;
     }
-    
-    .hero-breadcrumb {
-        font-size: 1.1rem;
-        opacity: 0.85;
-        margin-bottom: 1rem;
-        letter-spacing: 1px;
-    }
+   
     
     .hero-badge {
         display: inline-flex;
@@ -592,8 +586,8 @@
 /* Mobile adjustments */
 @media (max-width: 768px) {
     nav {
-        padding: 1rem 5%;
-        flex-wrap: wrap;
+        padding: 0.65rem 5%;
+        flex-wrap: nowrap;
     }
     
     .nav-links {
@@ -608,6 +602,11 @@
         gap: 1.25rem;
         box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         border-top: 1px solid var(--border-mid);
+    }.nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
     }
     
     .nav-links.active {
@@ -775,13 +774,14 @@
     <li><a href="contact.html">İletişim</a></li>
   </ul>
   
-  <a href="#basvur" class="nav-cta">Başvur</a>
-  
-  <!-- Hamburger -->
-  <div class="nav-hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="nav-right">
+    <a href="#basvur" class="nav-cta">Başvur</a>
+    
+    <div class="nav-hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </nav>
 
@@ -791,9 +791,6 @@
   <div class="hero-grid-lines"></div>
   
   <div class="hero-inner">
-    <div class="hero-breadcrumb">
-      Balkan Gençlik Okulu • Yaz Okulu 2026
-    </div>
     <div class="hero-badge">
       <span class="badge-dot"></span>
       Kayıtlar Açık • Nisan - Haziran 2026

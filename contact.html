@@ -248,6 +248,39 @@
         gap: 2rem;
         margin-top: 4rem;
     }
+    .contact-grid {
+    max-width: 1100px;
+    margin: 4rem auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+}
+
+.contact-input {
+    padding: 1rem;
+    border: 1px solid var(--border-mid);
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-family: inherit;
+    width: 100%;
+}
+
+.contact-textarea {
+    resize: vertical;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-info-card {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
     
     .workshop-card {
         background: white;
@@ -556,21 +589,7 @@
         display: block;
     }
 
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-        .dropdown-content {
-            position: static;
-            transform: none;
-            box-shadow: none;
-            border: none;
-            margin-top: 8px;
-            background: #f9f6f0;
-        }
-        
-        .info-bar-inner {
-            gap: 2.5rem;
-        }
-    }
+
     
     .reveal {
         opacity: 0;
@@ -589,6 +608,175 @@
         background: var(--border-mid);
         margin: 0 5%;
     }
+
+    /* Mobile adjustments */
+@media (max-width: 768px) {
+    nav {
+        padding: 0.65rem 5%;
+        flex-wrap: nowrap;
+    }
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        margin: 2.5rem auto;
+    }
+
+    .contact-info-card {
+        padding: 2rem;
+    }
+
+    .contact-textarea {
+        rows: 8;
+    }
+    
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: rgba(248, 244, 238, 0.98);
+        padding: 1.5rem 5%;
+        gap: 1.25rem;
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        border-top: 1px solid var(--border-mid);
+    }.nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Improved mobile dropdown */
+    .dropdown-content {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        background: #f9f6f0;
+        padding: 0.5rem 0 0.5rem 1rem;
+        margin-top: 0.25rem;
+        border-radius: 8px;
+    }
+
+    .dropdown-content a {
+        padding: 12px 20px;
+    }
+    
+    .hero {
+        min-height: 85vh;
+        padding-top: 80px;
+    }
+    
+    .hero-inner {
+        padding: 0 6%;
+    }
+    
+    .hero-title {
+        font-size: clamp(2.8rem, 10vw, 4.2rem);
+    }
+    
+    .hero-meta-row {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .hero-stats {
+        gap: 2rem;
+        justify-content: flex-start;
+    }
+    
+    .hero-stat-num {
+        font-size: 2.8rem;
+    }
+    
+    .section {
+        padding: 5rem 6%;
+    }
+    
+    .section-title {
+        font-size: 2.4rem;
+    }
+    
+    .workshops-grid {
+        grid-template-columns: 1fr;
+        gap: 1.75rem;
+    }
+    
+    .workshop-image {
+        height: 220px;
+    }
+    
+    .workshop-content {
+        padding: 1.75rem;
+    }
+    
+    .info-bar {
+        padding: 3rem 6%;
+    }
+    
+    .info-bar-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+    }
+    
+    .cta-section {
+        padding: 5rem 6% 4.5rem;
+    }
+    
+    .cta-question {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+    
+    .footer-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+    }
+}
+
+/* Hamburger Menu Button */
+@media (max-width: 768px) {
+    .nav-hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 1001;
+    }
+    
+    .nav-hamburger span {
+        width: 28px;
+        height: 2.5px;
+        background: var(--navy);
+        transition: all 0.3s;
+    }
+    
+    .nav-hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+    
+    .nav-hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .nav-hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
 </style>
 </head>
 <body>
@@ -605,7 +793,7 @@
     Balkan Gençlik Okulu
   </a>
   
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-menu">
     <li class="dropdown">
       <a href="#atolyeler" class="dropbtn" id="atolyeler-btn">
         Atölyeler <span class="arrow">▼</span>
@@ -626,7 +814,15 @@
     <li><a href="contact.html">İletişim</a></li>
   </ul>
   
-  <a href="#basvur" class="nav-cta">Başvur</a>
+  <div class="nav-right">
+    <a href="#basvur" class="nav-cta">Başvur</a>
+    
+    <div class="nav-hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 </nav>
 
 
@@ -646,21 +842,20 @@
 <section class="section">
   <div class="section-label">İletişim</div>
   <h2 class="section-title">Bize Ulaşın</h2>
-
-  <div style="max-width: 1100px; margin: 4rem auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;">
+  <div class="contact-grid">
     
     <!-- Contact Form -->
     <div>
-      <form style="display: flex; flex-direction: column; gap: 1.5rem;">
-        <input type="text" placeholder="Adınız Soyadınız" style="padding: 1rem; border: 1px solid var(--border-mid); border-radius: 8px; font-size: 1.1rem;">
-        <input type="email" placeholder="E-posta Adresiniz" style="padding: 1rem; border: 1px solid var(--border-mid); border-radius: 8px; font-size: 1.1rem;">
-        <textarea placeholder="Mesajınız..." rows="13" style="padding: 1rem; border: 1px solid var(--border-mid); border-radius: 8px; font-size: 1.1rem; resize: vertical;"></textarea>
+      <form class="contact-form">
+        <input type="text" placeholder="Adınız Soyadınız" class="contact-input">
+        <input type="email" placeholder="E-posta Adresiniz" class="contact-input">
+        <textarea placeholder="Mesajınız..." rows="13" class="contact-input contact-textarea"></textarea>
         <button type="submit" class="cta-btn" style="width: fit-content;">Gönder</button>
       </form>
     </div>
 
     <!-- Contact Info -->
-    <div style="background: white; padding: 3rem; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+    <div class="contact-info-card">
       <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">İletişim Bilgileri</h3>
       
       <div style="margin-bottom: 2rem;">
@@ -708,45 +903,58 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(e.target);
     }
   });
-}, { threshold: 0.15 });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+// === MOBILE MENU ===
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
 const dropdown = document.querySelector('.dropdown');
 const dropbtn = document.getElementById('atolyeler-btn');
-const dropdownMenu = document.getElementById('dropdown-menu');
 
-dropbtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    dropdown.classList.toggle('active');
-});
+// Hamburger toggle
+if (hamburger && navMenu) {
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
 
+// Dropdown
+if (dropbtn && dropdown) {
+    dropbtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+    });
+}
+
+// Close dropdown when clicking outside
 document.addEventListener('click', function(e) {
-    if (!dropdown.contains(e.target)) {
+    if (dropdown && !dropdown.contains(e.target)) {
         dropdown.classList.remove('active');
     }
 });
 
+// Close mobile menu when clicking links (except dropdown)
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (!link.closest('.dropdown')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
+});
+
+// Escape key
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         dropdown.classList.remove('active');
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
     }
-});
-
-const tumAtolyelerBtn = document.getElementById('tum-atolyeler-btn');
-
-tumAtolyelerBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    
-    // Scroll to the section
-    document.getElementById('hero').scrollIntoView({
-        behavior: 'smooth'
-    });
-    
-    // Open the dropdown after a short delay
-    setTimeout(() => {
-        dropdown.classList.add('active');
-    }, 600); // Adjust timing if needed
 });
 </script>
 </body>

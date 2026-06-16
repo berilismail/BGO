@@ -653,7 +653,7 @@
 @media (max-width: 768px) {
     nav {
         padding: 1rem 5%;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
     
     .nav-links {
@@ -672,6 +672,13 @@
     
     .nav-links.active {
         display: flex;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        flex-shrink: 0;
     }
 
     /* Mobile Dropdown */
@@ -816,13 +823,14 @@
     <li><a href="contact.html">İletişim</a></li>
   </ul>
   
-  <a href="#basvur" class="nav-cta">Başvur</a>
-  
-  <!-- Hamburger -->
-  <div class="nav-hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="nav-right">
+    <a href="#basvur" class="nav-cta">Başvur</a>
+    
+    <div class="nav-hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </div>
 </nav>
 
